@@ -41,6 +41,23 @@ RUN apt-get update \
       xdg-utils \
       wget
 
+# フォント追加
+RUN mkdir /noto
+
+ADD https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip /noto 
+
+WORKDIR /noto
+
+RUN apt-get install -y unzip && \
+    unzip NotoSansCJKjp-hinted.zip && \
+    mkdir -p /usr/share/fonts/noto && \
+    cp *.otf /usr/share/fonts/noto && \
+    chmod 644 -R /usr/share/fonts/noto/ && \
+    fc-cache -fv
+
+WORKDIR /
+RUN rm -rf /noto
+
 WORKDIR /app
 COPY package.json /app
 RUN npm install
