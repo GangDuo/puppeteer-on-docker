@@ -1,4 +1,4 @@
-FROM node:8.4.0
+FROM node:12.3.1
 
 RUN apt-get update \
  && apt-get install -y \
@@ -44,7 +44,7 @@ RUN apt-get update \
 # フォント追加
 RUN mkdir /noto
 
-ADD https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip /noto 
+ADD https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip /noto
 
 WORKDIR /noto
 
